@@ -24,5 +24,40 @@ namespace CRUDApplication
         {
             InitializeComponent();
         }
+
+        // Implementing the create method
+        public void Create()
+        {
+
+            using (DataSession session = new DataSession()) 
+            { 
+                var name = NameTextBox.Text;
+                var address = AddressTextBox.Text;
+
+                //check if Name text box and Address text box is not empty
+                if (name != null && address != null)
+                {
+                    //accesses users table
+                    // adds user to table
+                    // saves changes to table
+                    session.Users.Add(new User() { Name = name, Address = address });
+                    session.SaveChanges();
+                }
+            }
+        }
+
+        public void Read() 
+        { 
+        
+        }
+
+        public void Update() 
+        { 
+        
+        }
+
+        public void Delete() {
+        
+        }
     }
 }
