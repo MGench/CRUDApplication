@@ -20,6 +20,8 @@ namespace CRUDApplication
     /// </summary>
     public partial class MainWindow : Window
     {
+        public List<User> DatabaseUsers { get; private set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -47,17 +49,51 @@ namespace CRUDApplication
         }
 
         public void Read() 
-        { 
-        
+        {
+            using (DataSession session = new DataSession())
+            {
+                DatabaseUsers = session.Users.ToList();
+                ItemList.ItemsSource = DatabaseUsers; // binds list of users to the list view on UI
+            }
         }
 
-        public void Update() 
-        { 
-        
+        public void Update()
+        {
+            using (DataSession session = new DataSession())
+            {
+                User selectedUser = (User)ItemList.SelectedItem; // Selects the user by getting it's ID
+
+                var name = NameTextBox.Text;
+                var address = AddressTextBox.Text;
+
+                //check if Name text box and Address text box is not empty
+                if (name != null && address != null)
+                {
+                    User user = session.Users.Find(selectedUser.Id); // finds the specified user defined by it's ID
+                    user.Name = name; // updates name of user
+                    user.Address = address; // updates address of user
+
+                    session.SaveChanges(); // save changes
+
+                }
+            }
         }
 
-        public void Delete() {
-        
+        public void Delete()
+        {
+            using (DataSession session = new DataSession())
+            {
+                User selectedUser = (User)ItemList.SelectedItem; // Selects the user by getting it's ID
+
+                if (selectedUser != null)
+                {
+                    User user = session.Users.Find(selectedUser.Id); // finds the specified user defined by it's ID
+
+                    session.Remove(user); // removes user
+                    session.SaveChanges(); 
+                }
+
+            }
         }
     }
 }
