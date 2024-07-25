@@ -87,7 +87,7 @@ namespace CRUDApplication
 
                 if (selectedUser != null)
                 {
-                    User user = session.Users.Find(selectedUser.Id); // finds the specified user defined by it's ID
+                    User user = session.Users.Single(x=> x.Id == selectedUser.Id); // returns the only element where the id of user matches the selected users id
 
                     session.Remove(user); // removes user
                     session.SaveChanges(); 
