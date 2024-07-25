@@ -95,5 +95,39 @@ namespace CRUDApplication
 
             }
         }
+
+        // creates list
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Create();
+        }
+
+        // reads list
+
+        private void ReadButton_Click(object sender, RoutedEventArgs e)
+        {
+            Read();
+        }
+
+        // updates list
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
+
+        // deletes list
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            Delete();
+        }
+
+        // clears list
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+            ItemList.Items.Clear();
+
+        }
+
     }
 }
